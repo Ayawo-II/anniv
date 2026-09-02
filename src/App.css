@@ -1,0 +1,231 @@
+:root {
+  --pink: #ff6b9d;
+  --pink-light: #ffb3c1;
+  --cream: #fff5f7;
+  --text: #3a1f33;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+.app {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #ffe3ee 0%, #fff5f7 50%, #ffe9f0 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  gap: 24px;
+}
+
+.title {
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 800;
+  color: var(--text);
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.6);
+}
+
+.title .name {
+  color: var(--pink);
+}
+
+.subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: #b0617f;
+  font-weight: 500;
+}
+
+/* ---------- Confetti canvas ---------- */
+.confetti-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ---------- Hearts floating background ---------- */
+.hearts {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.heart {
+  position: absolute;
+  bottom: -60px;
+  animation-name: floatUp;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-110vh) rotate(20deg);
+  }
+}
+
+/* ---------- Cake ---------- */
+.cake {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.cake-hint {
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+  color: #a0567a;
+  font-weight: 600;
+  min-height: 1.5rem;
+}
+
+.cake-top,
+.cake-mid,
+.cake-bottom {
+  width: 200px;
+  border-radius: 10px;
+}
+
+.cake-top {
+  height: 45px;
+  background: #fff0c4;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #ff9f1c 0,
+    #ff9f1c 6px,
+    #fff0c4 6px,
+    #fff0c4 12px
+  );
+  border-radius: 10px 10px 4px 4px;
+}
+
+.cake-mid {
+  height: 55px;
+  background: #ff7aa2;
+  border-radius: 4px;
+}
+
+.cake-bottom {
+  height: 65px;
+  background: #ffb3c1;
+  border-radius: 4px 4px 14px 14px;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* Candles + flames */
+.candles {
+  display: flex;
+  gap: 24px;
+  margin-bottom: -2px;
+  position: relative;
+  z-index: 2;
+}
+
+.candle {
+  width: 12px;
+  height: 42px;
+  background: linear-gradient(180deg, #ffffff, #ffe3ee);
+  border-radius: 3px 3px 2px 2px;
+  box-shadow: inset -2px 0 0 rgba(0, 0, 0, 0.05);
+}
+
+.flames {
+  display: flex;
+  gap: 24px;
+  margin-bottom: -6px;
+  position: relative;
+  z-index: 3;
+}
+
+.flame {
+  width: 16px;
+  height: 22px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: flicker 0.9s ease-in-out infinite alternate;
+  box-shadow: 0 0 18px rgba(255, 170, 60, 0.8);
+  transform-origin: bottom center;
+}
+
+@keyframes flicker {
+  0% {
+    transform: scaleY(1) rotate(-3deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1.25) rotate(3deg);
+    opacity: 0.85;
+  }
+}
+
+/* ---------- Message ---------- */
+.message-card {
+  max-width: 620px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 107, 157, 0.25);
+  border-radius: 20px;
+  padding: 28px 32px;
+  box-shadow: 0 12px 40px rgba(255, 107, 157, 0.18);
+  margin-top: 10px;
+}
+
+.message-line {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.message-line:last-of-type {
+  margin-bottom: 6px;
+}
+
+.message-signature {
+  margin-top: 16px;
+  font-style: italic;
+  color: #b0617f;
+  font-weight: 500;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .cake-top,
+  .cake-mid,
+  .cake-bottom {
+    width: 150px;
+  }
+  .candles,
+  .flames {
+    gap: 18px;
+  }
+}
