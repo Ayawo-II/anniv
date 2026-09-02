@@ -99,9 +99,11 @@ export default function Chest({ onBack }: { onBack: () => void }) {
     <div className="chest-page">
       <Confetti trigger={burst} />
 
-      <button className="back-btn" onClick={onBack}>
-        ← {config.chest.back}
-      </button>
+      {!opened && (
+        <button className="back-btn" onClick={onBack}>
+          ← {config.chest.back}
+        </button>
+      )}
 
       <h1 className="chest-title">{config.chest.label}</h1>
 
